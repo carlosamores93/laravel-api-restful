@@ -1,0 +1,9 @@
+Creacion login and register con el comando:
+php artisan make:auth
+
+Configurew pasport package
+composer require laravel/passport=~4.0
+php artisan migrate
+php artisan passport:install
+
+
