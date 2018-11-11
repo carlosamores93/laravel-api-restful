@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+
+// Ver las rutas: php artisan route:list
 Route::apiResource('/products', 'ProductController');
 Route::group(['prefix' => 'products'], function(){
 	Route::apiResource('/{product}/reviews', 'ReviewController');

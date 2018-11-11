@@ -16,6 +16,7 @@ class ProductResource extends Resource
     {
         return [
             'name' => $this->name,
+            'slug' => $this->slug,
             'description' => $this->detail,
             'price' => $this->price,
             'stock' => $this->stock == 0 ? 'Out of stock' : $this->stock,
