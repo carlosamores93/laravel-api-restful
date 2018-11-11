@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\Product\ProductResource;
 use App\Http\Resources\Product\ProductCollection;
 use App\Http\Requests\ProductRequest;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseHttp;
 
 class ProductController extends Controller
 {
@@ -69,7 +69,7 @@ class ProductController extends Controller
 
         return response([
             'data' => new ProductResource($product)
-        ], 201);
+        ], ResponseHttp::HTTP_CREATED);
         // vendor/symfony/http-foundation/Response.php
         // HTTP_CREATED
 
