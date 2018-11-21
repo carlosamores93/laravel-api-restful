@@ -128,6 +128,7 @@ class ProductController extends Controller
     {
         //return $product;
         $product->delete();
-        return response('Producto borrado', ResponseHttp::HTTP_NO_CONTENT);
+        return response(null, ResponseHttp::HTTP_NO_CONTENT);
+        //return response(['data' => 'Producto borrado'], ResponseHttp::HTTP_NO_CONTENT);
     }
 }
