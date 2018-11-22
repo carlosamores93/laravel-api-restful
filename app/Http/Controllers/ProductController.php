@@ -9,6 +9,9 @@ use App\Http\Resources\Product\ProductCollection;
 use App\Http\Requests\ProductRequest;
 use Symfony\Component\HttpFoundation\Response as ResponseHttp;
 
+// Tambine funciona asi, renombrar donde está ResponseHttp -> Response
+//use Symfony\Component\HttpFoundation\Response;
+
 class ProductController extends Controller
 {
 
