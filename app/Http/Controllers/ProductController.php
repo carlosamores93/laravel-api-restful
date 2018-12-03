@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ProductNotBelongsToUser;
+use App\Http\Requests\ProductRequest;
+use App\Http\Resources\Product\ProductCollection;
+use App\Http\Resources\Product\ProductResource;
 use App\Model\Product;
 use Illuminate\Http\Request;
-use App\Http\Resources\Product\ProductResource;
-use App\Http\Resources\Product\ProductCollection;
-use App\Http\Requests\ProductRequest;
+use Auth;
 use Symfony\Component\HttpFoundation\Response as ResponseHttp;
 
 // Tambine funciona asi, renombrar donde está ResponseHttp -> Response
@@ -42,6 +44,8 @@ class ProductController extends Controller
         //
     }
 
+    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -60,6 +64,7 @@ class ProductController extends Controller
         $product->discount = $request->discount;
         $product->save();
         */
+
 
         $product = Product::create([
             'name' => $request->name,
@@ -109,6 +114,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+
+        $this->ProductUserCheck($product);
         if(isset($request['name'])){
             $request['slug'] = str_slug($request->name);
         }else if(isset($request['description'])){
@@ -133,5 +140,14 @@ class ProductController extends Controller
         $product->delete();
         return response(null, ResponseHttp::HTTP_NO_CONTENT);
         //return response(['data' => 'Producto borrado'], ResponseHttp::HTTP_NO_CONTENT);
+    }
+
+
+    // php artisan make:exception ProductNotBelongsToUser
+    // php artisan passport:install Token postam
+    public function ProductUserCheck($product){
+        if (Auth::id() !== $product->user_id) {
+            throw new ProductNotBelongsToUser;
+        }
     }
 }
